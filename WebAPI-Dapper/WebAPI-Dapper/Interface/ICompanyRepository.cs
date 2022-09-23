@@ -13,6 +13,6 @@ namespace WebAPI_Dapper.Contracts
         public Task DeleteCompany(int id);
         public Task<Company> GetMultipleResults(int id);
         public Task<List<Company>> MultipleMapping();
-        public Task CreateMultipleCompanies(List<CompanyForCreationOrUpdateDto> companies)
+        public Task CreateMultipleCompanies(List<CompanyForCreationOrUpdateDto> companies);
     }
 }
