@@ -1,4 +1,5 @@
 ﻿using System.Transactions;
+using WebAPI_Dapper.Enums;
 
 namespace WebAPI_Dapper.Entities
 {
@@ -8,6 +9,7 @@ namespace WebAPI_Dapper.Entities
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? Country { get; set; }
+        public Level Level { get; set; }
         public List<Employee> Employees { get; set; } = new List<Employee>();
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using WebAPI_Dapper.Contracts;
 using WebAPI_Dapper.DTO;
 using WebAPI_Dapper.Entities;
+using WebAPI_Dapper.Enums;
 
 namespace WebAPI_Dapper.Controllers
 {

@@ -51,12 +51,13 @@ namespace WebAPI_Dapper.Repository
 
         public async Task<Company> CreateCompany(CompanyForCreationOrUpdateDto company)
         {
-            var query = $"INSERT INTO Companies (Name, Address, Country) VALUES (@Name, @Address, @Country) SELECT CAST(SCOPE_IDENTITY() AS int)";
+            var query = $"INSERT INTO Companies (Name, Address, Country, Level) VALUES (@Name, @Address, @Country, @Level) SELECT CAST(SCOPE_IDENTITY() AS int)";
 
             var parameters = new DynamicParameters();
             parameters.Add("Name", company.Name, DbType.String);
             parameters.Add("Address", company.Address, DbType.String);
             parameters.Add("Country", company.Country, DbType.String);
+            parameters.Add("Level", company.Level, DbType.Int64);
 
             using (var connection = _context.CreateConnection())
             {
@@ -76,13 +77,18 @@ namespace WebAPI_Dapper.Repository
 
         public async Task<Company> UpdateCompany(int id, CompanyForCreationOrUpdateDto company)
         {
-            var query = "UPDATE Companies SET Name = @Name, Address = @Address, Country = @Country WHERE Id = @Id";
+            var query = "UPDATE Companies " +
+                        "SET Name = @Name, " +
+                        "Address = @Address, " +
+                        "Country = @Country, " +
+                        "Level = @Level WHERE Id = @Id";
 
             var parameters = new DynamicParameters();
             parameters.Add("Id", id, DbType.Int32);
             parameters.Add("Name", company.Name, DbType.String);
             parameters.Add("Address", company.Address, DbType.String);
             parameters.Add("Country", company.Country, DbType.String);
+            parameters.Add("Level", company.Level, DbType.Int64);
 
             using (var connection = _context.CreateConnection())
             {
@@ -93,7 +99,8 @@ namespace WebAPI_Dapper.Repository
                     Id = id,
                     Name = company.Name,
                     Address = company.Address,
-                    Country = company.Country
+                    Country = company.Country,
+                    Level = company.Level
                 };
 
                 return updateCompany;
